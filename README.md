@@ -25,7 +25,6 @@ Python 3.12, Django, Django REST Framework
 
 PostgreSQL
 
-Celery for background tasks
 
 Bootstrap 5
 
