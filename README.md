@@ -56,7 +56,7 @@ python manage.py runserver
 
 ## 📬 Contact Me
 
-✈️ **Telegram:** [@username](https://t.me/popendipelious)
+✈️ **Telegram:** [https://t.me/popendipelous]
 
 📧 **Email:** [github1maqsat@gmail.com]
   **SIGNAL** @m1dev0m.667
