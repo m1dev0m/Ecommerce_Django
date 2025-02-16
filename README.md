@@ -1,2 +1,2 @@
 # Ecommerce_Django
- I created a project on django e-commerce
+ E-commerce Project on Django 5.1.6
