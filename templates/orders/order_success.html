@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+
+    <h2 id="waitText" class="display-6 text-info mb-4"> СЕКУНДУ...</h2>
+
+
+    <h1 class="display-4 text-success d-none" id="successText">Ваш заказ успешно оформлен!</h1>
+
+    <p class="lead" id="statusText">Статус оплаты: <span class="text-warning">Обработка...</span></p>
+
+    <div id="loadingAnimation" class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status"></div>
+
+
+    <div id="successAnimation" class="d-none mt-4">
+        <svg class="text-success" width="120" height="120" viewBox="0 0 52 52">
+            <circle cx="26" cy="26" r="25" fill="none" stroke="green" stroke-width="4"/>
+            <path d="M14 27L22 35L38 17" fill="none" stroke="white" stroke-width="4"/>
+        </svg>
+    </div>
+</div>
+
+<style>
+    h1, h2, p {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #successAnimation svg {
+        background-color: #28a745;
+        border-radius: 50%;
+        box-shadow: 0 0 20px #28a745;
+        animation: popIn 0.6s ease forwards;
+    }
+
+    @keyframes popIn {
+        0% { transform: scale(0); opacity: 0; }
+        60% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(1); }
+    }
+</style>
+
+<script>
+    const loading = document.getElementById('loadingAnimation');
+    const success = document.getElementById('successAnimation');
+    const statusText = document.getElementById('statusText');
+    const waitText = document.getElementById('waitText');
+    const successText = document.getElementById('successText');
+
+
+    setTimeout(() => {
+        waitText.classList.add('d-none');
+        successText.classList.remove('d-none');
+    }, 1000);
+
+
+    setTimeout(() => {
+        loading.classList.add('d-none');
+        success.classList.remove('d-none');
+        statusText.innerHTML = 'Статус оплаты: <span class="text-success">Оплачено</span>';
+
+
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 4000);
+    }, 2500);
+</script>
+{% endblock %}

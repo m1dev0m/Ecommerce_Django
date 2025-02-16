@@ -1,0 +1,13 @@
+<h2>Order Details</h2>
+<p>Order ID: {{ order.id }}</p>
+<p>Status: {{ order.get_status_display }}</p>
+<p>Total Price: {{ order.total_price }}</p>
+<p>Shipping Address: {{ order.shipping_address }}</p>
+<p>Contact Number: {{ order.contact_number }}</p>
+
+<h3>Items:</h3>
+<ul>
+    {% for item in order.items %}
+        <li>{{ item.name }} - {{ item.quantity }} x ${{ item.price }} = ${{ item.subtotal }}</li>
+    {% endfor %}
+</ul>

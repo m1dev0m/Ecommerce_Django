@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Оплата заказа</h2>
+<p>Общая сумма к оплате: {{ total_price }}₽</p>
+
+<form method="post" action="{% url 'orders:order_success' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.card_number.label_tag }}
+        {{ form.card_number }}
+    </div>
+    <div class="form-group">
+        {{ form.cvv.label_tag }}
+        {{ form.cvv }}
+    </div>
+    <div class="form-group">
+        {{ form.expiration_date.label_tag }}
+        {{ form.expiration_date }}
+    </div>
+    <button type="submit" class="btn btn-primary">Оплатить и оформить заказ</button>
+</form>
+{% endblock %}

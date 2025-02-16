@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center my-4">Orders List</h1>
+
+<div class="container">
+    <ul class="list-group mb-4">
+        {% for order in orders %}
+            <li class="list-group-item">
+                {{ order.id }} - {{ order.product_name }} - {{ order.quantity }}
+            </li>
+        {% empty %}
+            <li class="list-group-item">No orders found.</li>
+        {% endfor %}
+    </ul>
+
+
+    <h2 class="my-3">Create New Order</h2>
+    <form method="post" action="" class="mb-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" name="product_name" class="form-control" placeholder="Product Name" required>
+        </div>
+        <div class="mb-3">
+            <input type="number" name="quantity" class="form-control" placeholder="Quantity" required>
+        </div>
+        <button type="submit" class="btn btn-success">Create Order</button>
+    </form>
+</div>
+{% endblock %}

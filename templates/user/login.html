@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - E-Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="text-center">Login</h2>
+        <form id="loginForm">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <div id="message" class="mt-3"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        fetch("{% url 'user:api_login' %}", {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: formData.get('username'),
+                password: formData.get('password')
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.token) {
+                document.getElementById('message').innerHTML = `
+                    <div class="alert alert-success">Login successful! Redirecting...</div>
+                `;
+                localStorage.setItem('token', data.token);
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 2000);
+            } else {
+                document.getElementById('message').innerHTML = `
+                    <div class="alert alert-danger">${data.error || 'Login failed!'}</div>
+                `;
+            }
+        })
+        .catch(error => {
+            document.getElementById('message').innerHTML = `
+                <div class="alert alert-danger">An error occurred. Please try again.</div>
+            `;
+        });
+    });
+</script>
+{% endblock %}
