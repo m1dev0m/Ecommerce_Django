@@ -1,32 +1,33 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+from celery.schedules import crontab
 
-# Get BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Secret Key
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# Debug mode
+
 DEBUG = os.getenv('DEBUG') == 'True'
 
-# Allowed Hosts (can be multiple)
+
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
-# Celery settings
+
+
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
-# Installed Apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,27 +44,23 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'djoser',
+    'djoser'
 ]
-
-# Rest Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
 }
 
-# Djoser settings
 DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
     'LOGIN_FIELD': 'username',
 }
-
-# Middleware settings
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -74,10 +71,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Root URL config
 ROOT_URLCONF = 'ecommerce.urls'
 
-# Templates settings
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -94,13 +90,14 @@ TEMPLATES = [
     },
 ]
 
-# WSGI application
 WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
-# Custom user model
 AUTH_USER_MODEL = 'user.CustomUser'
 
-# Database settings
+
+# Da    tabase
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -112,7 +109,10 @@ DATABASES = {
     }
 }
 
-# Password validation settings
+
+# Password validation
+# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -128,20 +128,30 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Localization settings
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
 
-# Login URLs
+# Internationalization
+# https://docs.djangoproject.com/en/5.1/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_TZ = True
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/products/'
 LOGOUT_REDIRECT_URL = '/'
 
-# Static files settings
-STATIC_URL = '/static/'
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = 'static/'
 
 # Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
