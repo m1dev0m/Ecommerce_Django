@@ -6,7 +6,7 @@ from .models import Product
 from .serializers import ProductSerializer
 from .forms import ProductForm
 from django.core.paginator import Paginator
-
+from .services import get_product
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -44,6 +44,12 @@ def add_product_view(request):
         form = ProductForm()
     return render(request, 'products/add_product.html', {'form': form})
 
+
+
+
+def product_detail(request, product_id):
+    product = get_product(product_id)
+    return render(request, "product_detail.html", {"product": product})
 
 
 

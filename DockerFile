@@ -1,0 +1,38 @@
+FROM python:3.12.3
+
+
+SHELL ["/bin/bash", "-c"]
+
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+
+RUN pip install --upgrade pip
+
+
+RUN apt update && apt -qy install \
+    gcc \
+    libjpeg-dev \
+    libxslt-dev \
+    libpq-dev \
+    python3-dev \
+    build-essential \
+    redis \
+    && rm -rf /var/lib/apt/lists/*
+
+а
+RUN useradd -rms /bin/bash yt
+WORKDIR /yt
+
+
+COPY . /yt
+
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+EXPOSE 8000
+
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
