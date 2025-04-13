@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'False'
 
 
-ALLOWED_HOSTS = ['89.35.125.22', 'freezeeco.kz']
+ALLOWED_HOSTS = ['100.20.92.101','44.225.181.72','44.227.217.144', 'freezeeco.kz']
 
 
 
