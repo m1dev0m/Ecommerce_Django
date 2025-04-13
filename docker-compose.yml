@@ -7,8 +7,8 @@ services:
     restart: always
     environment:
       POSTGRES_DB: ecommerce
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 45789612
+      POSTGRES_USER: 
+      POSTGRES_PASSWORD: 
     ports:
       - "5432:5432"
     volumes:
@@ -36,9 +36,9 @@ services:
       - DEBUG=True
       - DB_NAME=ecommerce
       - DB_USER=postgres
-      - DB_PASSWORD=45789612
-      - DB_HOST=db
-      - DB_PORT=5432
+      - DB_PASSWORD=4
+      - DB_HOST=
+      - DB_PORT=
 
 volumes:
   postgres_data:
