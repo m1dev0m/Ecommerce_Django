@@ -17,7 +17,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 
-DEBUG = os.getenv('DEBUG') == 'False'
+DEBUG = 'False'
 
 
 ALLOWED_HOSTS = ['100.20.92.101','44.225.181.72','44.227.217.144', 'freezeeco.kz','ecommerce-django-q4jw.onrender.com',]
